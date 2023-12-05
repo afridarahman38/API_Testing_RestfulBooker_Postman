@@ -1,0 +1,7 @@
+firstname,lastname,totalprice,depositpaid,checkin,checkout,additionalneeds
+abdul,hasan,35,TRUE,2023-04-12,2022-08-24,Chips
+jamil,mia,62,FALSE,2023-01-25,2023-10-29,chocolates
+karim,islam,90,TRUE,2022-11-09,2025-01-02,cake
+jorina,khatun,23.45,TRUE,2022-08-24,2026-03-09,fruit
+rohima,akter,100.2,FALSE,2022-06-08,2027-05-14,flower
+mina,islam,16,TRUE,2022-03-23,2028-07-18,egg

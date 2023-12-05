@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "e7b26bb2-0c16-4bdb-8e5d-ec62fd70c291",
+		"name": "Restful-Booker-Practice",
+		"description": "practice the full process.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27979058"
+	},
+	"item": [
+		{
+			"name": "creation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var fname = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"pm.environment.set(\"firstname\", fname)\r",
+							"\r",
+							"var lname = pm.environment.replaceIn(\"{{$randomLastName}}\")\r",
+							"pm.environment.set(\"lastname\", lname)\r",
+							"\r",
+							"var tprice = pm.environment.replaceIn(\"{{$randomPrice}}\")\r",
+							"pm.environment.set(\"totalprice\", tprice)\r",
+							"\r",
+							"var dpaid = pm.environment.replaceIn(\"{{$randomBoolean}}\")\r",
+							"pm.environment.set(\"depositpaid\", dpaid)\r",
+							"\r",
+							"const date = require(\"moment\")\r",
+							"const today = date()\r",
+							"pm.environment.set(\"checkin\", today.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"checkout\", today.add(5, \"d\").format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"var addneed = pm.environment.replaceIn(\"{{$randomProduct}}\")\r",
+							"pm.environment.set(\"additionalneeds\", addneed)\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"\r",
+							"pm.environment.set(\"id\", data.bookingid)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstname\" : \"{{firstname}}\",\r\n\t\"lastname\" : \"{{lastname}}\",\r\n\t\"totalprice\" : {{totalprice}},\r\n\t\"depositpaid\" : {{depositpaid}},\r\n\t\"bookingdates\" : {\r\n    \t\"checkin\" : \"{{checkin}}\",\r\n    \t\"checkout\" : \"{{checkout}}\"\r\n\t},\r\n\t\"additionalneeds\" : \"{{additionalneeds}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/booking",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getinfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jdata = pm.response.json()\r",
+							"\r",
+							"pm.test(\"first name validation\", function (){\r",
+							"    pm.expect(jdata.firstname).to.eql(pm.iterationData.get(\"firstname\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"last name validation\", function(){\r",
+							"    pm.expect(jdata.lastname).to.eql(pm.iterationData.get(\"lastname\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"totalprice validation\", function(){\r",
+							"    pm.expect(jdata.totalprice).to.eql(pm.iterationData.get(\"totalprice\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"depositpaid validation\", function(){\r",
+							"    pm.expect(jdata.depositpaid).to.eql(pm.iterationData.get(\"depositpaid\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"checkin date validation\", function(){\r",
+							"    pm.expect(jdata.bookingdates.checkin).to.eql(pm.iterationData.get(\"checkin\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"checkout date validation\", function(){\r",
+							"    pm.expect(jdata.bookingdates.checkout).to.eql(pm.iterationData.get(\"checkout\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"additional needs validation\", function(){\r",
+							"    pm.expect(jdata.additionalneeds).to.eql(pm.iterationData.get(\"additionalneeds\"))\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/booking/{{id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accesstoken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var tokenid = pm.response.json()\r",
+							"pm.environment.set(\"token\", tokenid.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"admin\",\r\n\t\"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatedata",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstname\" : \"XYZ\",\r\n\t\"lastname\" : \"ABC\",\r\n\t\"totalprice\" : 111,\r\n\t\"depositpaid\" : true,\r\n\t\"bookingdates\" : {\r\n    \t\"checkin\" : \"2018-01-01\",\r\n    \t\"checkout\" : \"2019-01-01\"\r\n\t},\r\n\t\"additionalneeds\" : \"Breakfast\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/booking/{{id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getinfo Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/booking/{{id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dltdata",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/booking/{{id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getinfo Copy 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/booking/{{id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

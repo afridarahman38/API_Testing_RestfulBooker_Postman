@@ -1,0 +1,5 @@
+newman run Restful-Booker-Practice.postman_collection.json -e Restful-Booker-practice.postman_environment.json
+
+newman run Restful-Booker-Practice.postman_collection.json -e Restful-Booker-practice.postman_environment.json -r cli,html
+
+newman run Restful-Booker-Practice.postman_collection.json -e Restful-Booker-practice.postman_environment.json -r cli,htmlextra
