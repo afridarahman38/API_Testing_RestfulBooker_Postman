@@ -17,17 +17,17 @@ Node.js and npm: Newman is built on Node.js, so you need to have Node.js and npm
 
 
 ## Tools Used:
-Postman
-Newman
+- Postman
+- Newman
 
 ## Key Steps and Activities:
-API Endpoint Identification
-Postman Collection Creation
-Environment Setup
-Data-Driven Testing
-Authorization Testing
-Automation with Newman
-Report Generation
+- API Endpoint Identification
+- Postman Collection Creation
+- Environment Setup
+- Data-Driven Testing
+- Authorization Testing
+- Automation with Newman
+- Report Generation
 
 ## How to Run
 #### 1. Clone the repository to your local machine:
