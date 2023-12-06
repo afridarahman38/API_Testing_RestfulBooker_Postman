@@ -18,6 +18,7 @@ Node.js and npm: Newman is built on Node.js, so you need to have Node.js and npm
 
 ## Tools Used:
 - Postman: Postman was chosen for its user-friendly interface and robust features that facilitate API testing, request creation, and response validation.
+  
 - Newman: Newman, the command-line collection runner for Postman, was utilized for automating the API testing process. It allows for the execution of Postman collections directly from the command line, making it convenient for integration into continuous integration/continuous deployment (CI/CD) pipelines.
 
 ## Key Steps and Activities:
