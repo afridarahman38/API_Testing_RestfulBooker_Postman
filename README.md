@@ -1,7 +1,7 @@
 # API Testing with Postman and Report Generation using Newman
 
 ## Overview
-This project demonstrates API testing using Postman for the RestfulBooker API. It includes a collection of API requests in Postman and utilizes Newman, the command-line collection runner for Postman, to generate detailed reports.
+The project aimed to conduct comprehensive API testing for a web application using Postman and Newman, ensuring functionality, reliability, and performance. Key steps included API endpoint identification, collection creation, environment setup, data-driven testing, authorization testing, and automation.
 
 ## Prerequisites
 Postman: Ensure that you have Postman installed on your machine. You can download it from [Postman's official website](https://www.postman.com/downloads/)
@@ -15,8 +15,21 @@ Node.js and npm: Newman is built on Node.js, so you need to have Node.js and npm
 
 - scripts/: This directory contains scripts used for report generation and other automation tasks.
 
-## How to Run
 
+## Tools Used:
+Postman
+Newman
+
+## Key Steps and Activities:
+API Endpoint Identification
+Postman Collection Creation
+Environment Setup
+Data-Driven Testing
+Authorization Testing
+Automation with Newman
+Report Generation
+
+## How to Run
 #### 1. Clone the repository to your local machine:
 
 ```http
@@ -41,5 +54,6 @@ This command executes the tests and generates an HTML report in the reports/ dir
 After running the tests, navigate to the reports/ directory and open the generated HTML report in a web browser for a detailed overview of test results.
 
 ## Acknowledgments
-Special thanks to the creators of Postman and Newman for providing powerful tools for API testing.
-Feel free to contribute, open issues, or provide feedback to make this project even better!
+This API testing project successfully ensured the reliability and performance of the web application's APIs, providing valuable insights into potential issues early in the development process. The combination of Postman and Newman proved to be a powerful and efficient solution for API testing and automation.
+
+Special thanks to the creators of Postman and Newman for providing powerful tools for API testing. Feel free to contribute, open issues, or provide feedback to make this project even better!
